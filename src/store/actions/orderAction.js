@@ -42,14 +42,14 @@ export const purchaseInit = () => {
     };
 };
 
-export const fetchOrdersSuccess = (orders) => {
+const fetchOrdersSuccess = (orders) => {
     return {
         type: actionTypes.FETCH_ORDERS_SUCCESS,
         orders: orders
     };
 };
 
-export const fetchOrdersFailed = (error) => {
+const fetchOrdersFailed = (error) => {
     return {
         type: actionTypes.PURCHASE_BURGER_FAILED,
         error: error
@@ -74,6 +74,7 @@ export const fetchOrders = () => {
                     });
                 }
                 dispatch(fetchOrdersSuccess(fetchedOrders))
+                console.log(res.data, 'from fetching')
 
             })
             .catch(err => {
