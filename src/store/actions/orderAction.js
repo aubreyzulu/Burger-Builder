@@ -58,12 +58,13 @@ const fetchOrdersFailed = (error) => {
 
 export const fetchOrdersStart = () => {
     return {
-        type: actionTypes.PURCHASE_BURGER_START
+        type: actionTypes.FETCH_ORDERS_START
     };
 };
 
 export const fetchOrders = () => {
     return dispatch => {
+        dispatch(fetchOrdersStart())
         axios.get('/orders.json')
             .then(res => {
                 const fetchedOrders = [];
