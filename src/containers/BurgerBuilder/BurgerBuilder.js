@@ -80,10 +80,7 @@ class BurgerBuilder extends Component {
                 purchaseCancelled={this.purchaseCancelHandler}
                 purchaseContinued={this.purchaseContinueHandler} />;
         }
-        // if (this.state.loading) {
-        //     orderSummary = <Spinner />;
-        // }
-        // {salad: true, meat: false, ...}
+
         return (
             <Aux>
                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
@@ -98,9 +95,9 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
     return {
-        ings: state.ingredients,
-        totalPrice: state.totalPrice,
-        error: state.error
+        ings: state.burgerReducer.ingredients,
+        totalPrice: state.burgerReducer.totalPrice,
+        error: state.burgerReducer.error
     }
 }
 

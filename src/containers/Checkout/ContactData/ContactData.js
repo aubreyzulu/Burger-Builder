@@ -60,7 +60,7 @@ class ContactData extends Component {
                         { value: 'cheapest', displayValue: 'Cheapest' }
                     ]
                 },
-                value: ''
+                value: 'fastest'
             }
         },
         loading: false
@@ -115,7 +115,7 @@ class ContactData extends Component {
                 <Button btnType="Success">ORDER</Button>
             </form>
         );
-        if (this.state.loading) {
+        if (this.props.loading) {
             form = <Spinner />;
         }
         return (
@@ -129,15 +129,16 @@ class ContactData extends Component {
 }
 const mapStateToProps = state => {
     return {
-        ingredients: state.ingredients,
-        totalPrice: state.totalPrice
+        ingredients: state.burgerReducer.ingredients,
+        totalPrice: state.burgerReducer.totalPrice,
+        loading: state.orderReducer.loading
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onOrderBurger: (orderInfo) => dispatch(orderActions.purchaseBurgerStart(orderInfo))
+        onOrderBurger: (orderInfo) => dispatch(orderActions.purchaseBurger(orderInfo))
     };
 }
 
-export default connect(mapStateToProps)(withErrorHandler(ContactData, axios));
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
