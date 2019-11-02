@@ -9,8 +9,9 @@ import registerServiceWorker from './registerServiceWorker';
 import burgerReducer from './store/reducers/burgerBuilderReducer';
 import thunk from 'redux-thunk';
 import orderReducer from './store/reducers/orderReducer';
+import authReducer from './store/reducers/authReducer';
 
-const rootReducer = combineReducers({ orderReducer, burgerReducer })
+const rootReducer = combineReducers({ orderReducer, burgerReducer, authReducer })
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 const app = (
