@@ -3,7 +3,7 @@ import * as actionTypes from './actionTypes';
 
 export const authStart = () => {
     return {
-        type: actionTypes.AUTH_START
+        type: actionTypes.AUTH_START,
     };
 };
 
@@ -21,7 +21,20 @@ export const authFail = (error) => {
         error: error
     };
 };
+export const logout = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT,
+        token: null
 
+    }
+}
+export const checkAuthTimeout = (expirationTime) => {
+    return dispatch => {
+        setInterval(() => {
+            dispatch(logout())
+        }, expirationTime)
+    }
+}
 
 export const auth = (email, password, isSignup) => {
     return dispatch => {
@@ -42,10 +55,11 @@ export const auth = (email, password, isSignup) => {
             .then(response => {
                 console.log(response);
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
+                dispatch(checkAuthTimeout(response.date.expiresIn));
             })
             .catch(error => {
-                console.log(error)
-                dispatch(authFail(error))
+                // console.log(error.response.data.error.message)
+                // dispatch(authFail(error.response.data.error.message))
             })
     };
 };
